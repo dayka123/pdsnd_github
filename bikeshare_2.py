@@ -79,10 +79,10 @@ def load_data(city, month, day):
 
 
     if day != 'all':
-        df = df[df['Start Time'].dt.dayofweek == DAYS.index(day)]
+        df = df[df['Start Time'].dt.dayofweek == DAYS.index(day.lower())]
 
     if month != 'all':
-        df = df[df['Start Time'].dt.month == MONTHS.index(month)+1]
+        df = df[df['Start Time'].dt.month == MONTHS.index(month.lower())+1]
     return df
 
 
@@ -156,11 +156,13 @@ def user_stats(df):
 
     # Display counts of user types
     print(df['User Type'].value_counts())
+    print('-'*20)
     if 'Gender' in df.columns and 'Birth Year' in df.columns:
         # Display counts of gender
         print(df['Gender'].value_counts())
-
+        print('-'*20)
         # Display earliest, most recent, and most common year of birth
+
         print('Earliest year of birth is {}.'.format(df['Birth Year'].max()))
         print('Most recent year of birth is {}.'.format(df['Birth Year'].min()))
         print('Most common year of birth is {}.'.format(df['Birth Year'].mode()[0]))
@@ -170,11 +172,16 @@ def user_stats(df):
 
 
 def show_raw_data(df):
+    # Drop excess columns
     df = df.drop(columns = ['Month', 'Day of week', 'Hour', 'Route'])
-    pd.set_option('display.max_columns', 0)
+
+    # Set pandas not to truncate raw data
+    pd.set_option('display.max_columns', None)
+
     response = input('Do you want to see raw data? Type "yes" or "no".\n')
     while response == 'yes':
-        print(df.sample(n=5))
+        # print a random sample of 6 rows
+        print(df.sample(n=6))
         response = input('\nDo you want to see next sample? Type "yes" or "no".\n')
 
 
