@@ -2,7 +2,7 @@
 May 9, 2020
 
 ### Project Title
-Bikeshare stats
+Bikeshare stats for Chicago, New York City and Washington
 
 ### Description
 Calculates statistics about bike sharing in Washington
