@@ -170,11 +170,16 @@ def user_stats(df):
 
 
 def show_raw_data(df):
+    # Drop excess columns
     df = df.drop(columns = ['Month', 'Day of week', 'Hour', 'Route'])
-    pd.set_option('display.max_columns', 0)
+
+    # Set pandas not to truncate raw data
+    pd.set_option('display.max_columns', None)
+
     response = input('Do you want to see raw data? Type "yes" or "no".\n')
     while response == 'yes':
-        print(df.sample(n=5))
+        # print a random sample of 6 rows
+        print(df.sample(n=6))
         response = input('\nDo you want to see next sample? Type "yes" or "no".\n')
 
 
