@@ -79,10 +79,10 @@ def load_data(city, month, day):
 
 
     if day != 'all':
-        df = df[df['Start Time'].dt.dayofweek == DAYS.index(day)]
+        df = df[df['Start Time'].dt.dayofweek == DAYS.index(day.lower())]
 
     if month != 'all':
-        df = df[df['Start Time'].dt.month == MONTHS.index(month)+1]
+        df = df[df['Start Time'].dt.month == MONTHS.index(month.lower())+1]
     return df
 
 
